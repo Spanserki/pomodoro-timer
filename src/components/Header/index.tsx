@@ -7,14 +7,15 @@ export function Header() {
     return (
         <HeaderContainer>
                 <img src={logo} />
-            <nav>
-                <NavLink to="/" title="Timer">
-                    <Timer size={24}/>
+                <nav>
+                    <NavLink to="/" title="Timer">
+                        <Timer size={24}/>
                     </NavLink>
-                <NavLink to="/history" title="History">
-                    <Scroll size={24}/>
+                    
+                    <NavLink to="/history" title="History">
+                        <Scroll size={24}/>
                     </NavLink>
-            </nav>
+                </nav>
         </HeaderContainer>
     )
 }
