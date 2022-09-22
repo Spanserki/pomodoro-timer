@@ -1,13 +1,54 @@
 import {Play} from 'phosphor-react'
-import { CountdownContainer, FormContainer, HomeContainer, MinutesAmountInput, Separator, StartCountdownButton, TaskInput } from './styles'
+import {zodResolver} from '@hookform/resolvers/zod'
+import zod from 'zod'
+import { useForm } from 'react-hook-form'
+
+import { 
+    CountdownContainer, 
+    FormContainer, 
+    HomeContainer, 
+    MinutesAmountInput, 
+    Separator, 
+    StartCountdownButton, 
+    TaskInput 
+} from './styles'
+
+const formCycleFormValidationSchema = zod.object({ //validando um objeto
+    task: zod.string().min(1, "Informe a tarefa"),
+    minutesAmount: zod.number().min(5, "Informe o tempo da tarefa").max(60)
+})
+
+
+type NewCycleFormData = zod.infer<typeof formCycleFormValidationSchema>
 
 export function Home() {
+
+    const {register, handleSubmit, watch, formState, reset} = useForm<NewCycleFormData>({
+        resolver: zodResolver(formCycleFormValidationSchema),
+        defaultValues: {
+            task: '',
+            minutesAmount: 0,
+        }
+    })
+
+    function handleCreateNewCycle(data:NewCycleFormData) {
+        reset();
+    }
+    
+    const task = watch('task')
+    const isDisableButton = !task
+
+    console.log(formState.errors)
     return (
         <HomeContainer>
-            <form action="">
+            <form action="" onSubmit={handleSubmit(handleCreateNewCycle)}>
                 <FormContainer>
                     <label htmlFor="task">Vou trabalhar em</label>
-                    <TaskInput id="task" list='task-suggestion' placeholder='Dê um nome para seu projeto'/>
+                    <TaskInput 
+                        id="task" list='task-suggestion'
+                        placeholder='Dê um nome para seu projeto'
+                        {...register('task')}
+                    />
 
                     <datalist id='task-suggestion'>
                         <option value="JavaScript"></option>
@@ -24,9 +65,9 @@ export function Home() {
                         id="minutesAmount" 
                         placeholder='00'
                         step={5}
-                        min={5}
-                        max={60}
                         list="number-suggestion"
+                        required
+                        {...register('minutesAmount', {valueAsNumber: true})}
                     />
 
                     <datalist id='number-suggestion'>
@@ -49,7 +90,10 @@ export function Home() {
                         <span>0</span>
                     </CountdownContainer>
 
-                    <StartCountdownButton type="submit">
+                    <StartCountdownButton 
+                         disabled={isDisableButton}
+                         type="submit"
+                         >
                         <Play size={24}/>
                         Começar
                     </StartCountdownButton>
