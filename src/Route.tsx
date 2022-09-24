@@ -1,8 +1,7 @@
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, BrowserRouter} from 'react-router-dom'
 import { Home } from './pages/Home'
 import { History } from './pages/History'
 import { DefaultLayout } from './layouts/DefaultLayouts'
-import { BrowserRouter } from 'react-router-dom'
 
 export function Router() {
     return (
@@ -14,6 +13,5 @@ export function Router() {
                 </Route>
             </Routes>
         </BrowserRouter>
-        
     )
 }
