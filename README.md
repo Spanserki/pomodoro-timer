@@ -1,8 +1,12 @@
 <h2> Pomodoro timer ⏰</h2>
 
-<hr/>
+<h3>Be welcome :raised_hand_with_fingers_splayed:</h3>
 
-<p>Neste projeto foi utilizado React.Js, Vite</p>
+#Technologies
+<p>
+  <img src="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black" />
+  <img src="https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white" />
+</p>
 
 <h3>Objetivo</h3>
 
